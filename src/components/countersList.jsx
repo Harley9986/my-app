@@ -4,7 +4,7 @@ import Counter from "./counter";
 const CountersList = () => {
   const initialState = [
     { id: 0, value: 0, name: "Ненужная вещь" },
-    { id: 1, value: 4, name: "Ложка" },
+    { id: 1, value: 0, name: "Ложка" },
     { id: 2, value: 0, name: "Вилка" },
     { id: 3, value: 0, name: "Тарелка" },
     { id: 4, value: 0, name: "Набор минималиста" },
@@ -16,14 +16,24 @@ const CountersList = () => {
     const newValue = counters.map((c) => {
       if (c.id === id) {
         c.value++;
+        return c.value;
+      } else {
+        return c;
       }
-      return setCounters(newValue);
     });
+    setCounters(newValue);
   };
 
   const handleDecrement = (id) => {
-    console.log("handleDecrement", id);
-    // setValue((prevState) => prevState - 1);
+    const newValue = counters.map((c) => {
+      if (c.id === id) {
+        c.value--;
+        return c;
+      } else {
+        return c;
+      }
+    });
+    setCounters(newValue);
   };
 
   const handleDelete = (id) => {
@@ -33,7 +43,6 @@ const CountersList = () => {
 
   const handleReset = () => {
     setCounters(initialState);
-    console.log("handleReset");
   };
 
   return (
